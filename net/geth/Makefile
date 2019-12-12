@@ -8,15 +8,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=go-ethereum
-PKG_VERSION:=1.8.27
-PKG_RELEASE:=2
+PKG_VERSION:=1.9.9
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/ethereum/go-ethereum/tar.gz/v${PKG_VERSION}?
-PKG_HASH:=45d264106991d0e2a4c34ac5d6539fc9460c768fc70588ea38a25f467039ece8
+PKG_HASH:=52fd34920841c9915d67f28c416ce7e98b654c116b03edee94f6ef06e5a8cf92
 
 PKG_MAINTAINER:=Mislav Novakovic <mislav.novakovic@sartura.hr>
-PKG_LICENSE:=GPL-3 LGPL-3
+PKG_LICENSE:=GPL-3.0-or-later LGPL-3.0-or-later
 PKG_LICENSE_FILES:=COPYING COPYING.LESSER
 
 PKG_BUILD_DEPENDS:=golang/host

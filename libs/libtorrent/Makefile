@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libtorrent
-PKG_VERSION:=0.13.7
+PKG_VERSION:=0.13.8
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/rakshasa/libtorrent/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=86b4b1753385aaddf9e59ad94f1292eee5102139eb57520e84d1af2f04693708
+PKG_HASH:=0f6c2e7ffd3a1723ab47fdac785ec40f85c0a5b5a42c1d002272205b988be722
 
 PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
 PKG_LICENSE:=GPL-2.0-or-later
@@ -30,7 +30,7 @@ define Package/libtorrent
   CATEGORY:=Libraries
   TITLE:=Rakshasa's BitTorrent library
   URL:=https://rakshasa.github.io/rtorrent/
-  DEPENDS:=+libopenssl +libsigcxx +zlib
+  DEPENDS:=+libopenssl +libstdcpp +zlib
 endef
 
 define Package/libtorrent/description
@@ -50,21 +50,17 @@ CONFIGURE_ARGS += \
 	--disable-instrumentation \
 	--with-epoll \
 	--with-zlib=$(STAGING_DIR)/usr \
-	--without-kqueue \
-	$(DISABLE_IPV6)
+	--without-kqueue
+
+TARGET_CXXFLAGS += -faligned-new
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/torrent $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libtorrent.{a,so*} $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libtorrent.a $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libtorrent.pc $(1)/usr/lib/pkgconfig/
-endef
-
-define Package/libtorrent/install
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libtorrent.so.* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libtorrent))

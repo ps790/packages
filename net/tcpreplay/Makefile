@@ -17,6 +17,7 @@ PKG_HASH:=955aed6a40f49a5b8c1234fd0a928edc5c665d94b7755ab5769c30938e33f380
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=docs/LICENSE
+PKG_CPE_ID:=cpe:/a:appneta:tcpreplay
 
 PKG_FIXUP:=libtool
 PKG_INSTALL:=1
@@ -28,7 +29,7 @@ TCPREPLAY_MODULES:= \
 	tcpreplay tcpreplay-edit tcprewrite
 
 define Package/tcpreplay/default
-  SUBMENU:=tcprelay
+  SUBMENU:=Tcpreplay
   SECTION:=net
   CATEGORY:=Network
   URL:=http://tcpreplay.appneta.com/

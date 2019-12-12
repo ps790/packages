@@ -8,19 +8,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libtasn1
-PKG_VERSION:=4.13
-PKG_RELEASE:=2
+PKG_VERSION:=4.15.0
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@GNU/$(PKG_NAME)
-PKG_HASH:=7e528e8c317ddd156230c4e31d082cd13e7ddeb7a54824be82632209550c8cca
+PKG_HASH:=dd77509fe8f5304deafbca654dc7f0ea57f5841f41ba530cff9a5bf71382739e
 
 PKG_MAINTAINER:=Nikos Mavrogiannopoulos <n.mavrogiannopoulos@gmail.com>
-PKG_LICENSE:=LGPLv2.1+
+PKG_LICENSE:=LGPL-2.1-or-later
 PKG_LICENSE_FILES:=COPYING.LIB
+PKG_CPE_ID:=cpe:/a:gnu:libtasn1
 
 #PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
+PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -36,6 +38,7 @@ define Package/libtasn1/description
  Distinguish Encoding Rules (DER) manipulation.
 endef
 
+TARGET_CFLAGS += -ffunction-sections -fdata-sections
 TARGET_LDFLAGS += -Wl,--gc-sections
 
 CONFIGURE_ARGS += \

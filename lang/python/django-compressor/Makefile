@@ -9,23 +9,20 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=django-compressor
 PKG_VERSION:=2.2
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 
-PKG_SOURCE:=django_compressor-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://files.pythonhosted.org/packages/source/d/$(PKG_NAME)/
+PYPI_NAME:=$(PKG_NAME)
+PYPI_SOURCE_NAME:=django_compressor
 PKG_HASH:=9616570e5b08e92fa9eadc7a1b1b49639cce07ef392fc27c74230ab08075b30f
 
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(BUILD_VARIANT)-$(PKG_NAME)-$(PKG_VERSION)
-
+include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include ../python-package.mk
 include ../python3-package.mk
-
-PKG_UNPACK:=$(HOST_TAR) -C $(PKG_BUILD_DIR) --strip-components=1 -xzf $(DL_DIR)/$(PKG_SOURCE)
 
 define Package/$(PKG_NAME)/Default
   SUBMENU:=Python
@@ -39,10 +36,11 @@ define Package/python-$(PKG_NAME)
 $(call Package/$(PKG_NAME)/Default)
   DEPENDS:= \
 	+PACKAGE_python-$(PKG_NAME):python \
-	+PACKAGE_python-$(PKG_NAME):python-django \
+	python-django1 \
 	+PACKAGE_python-$(PKG_NAME):python-django-appconf \
 	+PACKAGE_python-$(PKG_NAME):python-rcssmin
   VARIANT:=python
+  MDEPENDS:=python-django1
 endef
 
 define Package/python-$(PKG_NAME)/description
@@ -56,10 +54,11 @@ define Package/python3-$(PKG_NAME)
 $(call Package/$(PKG_NAME)/Default)
   DEPENDS:= \
 	+PACKAGE_python3-$(PKG_NAME):python3 \
-	+PACKAGE_python3-$(PKG_NAME):python3-django \
+	python3-django \
 	+PACKAGE_python3-$(PKG_NAME):python3-django-appconf \
 	+PACKAGE_python3-$(PKG_NAME):python3-rcssmin
   VARIANT:=python3
+  MDEPENDS:=python3-django
 endef
 
 define Package/python3-$(PKG_NAME)/description

@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pdns-recursor
-PKG_VERSION:=4.1.14
+PKG_VERSION:=4.2.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://downloads.powerdns.com/releases/
-PKG_HASH:=7fceb8fa3bea693aad49d137c801bb3ecc15525cc5a7dc84380321546e87bf14
+PKG_HASH:=8d8c3235cc5281f0fc51946129f22758778f4c50bfda095d5856feb4c756891f
 
 PKG_MAINTAINER:=James Taylor <james@jtaylor.id.au>
 PKG_LICENCE:=GPL-2.0-only
@@ -41,9 +41,9 @@ endef
 
 CONFIGURE_ARGS+= \
 	--sysconfdir=/etc/powerdns \
-	--with-lua \
-	--without-luajit \
-	--disable-libsodium \
+	--with-lua=lua \
+	--without-libcap \
+	--without-libsodium \
 	--with-protobuf \
 	--without-net-snmp \
 	--disable-silent-rules
